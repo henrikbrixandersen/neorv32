@@ -321,7 +321,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   transmit_fifo_gen:
   for i in 0 to SLINK_NUM_TX-1 generate
-    transmit_fifo_inst: neorv32_fifo
+    transmit_fifo_inst: entity neorv32.neorv32_fifo
     generic map (
       FIFO_DEPTH => SLINK_TX_FIFO, -- number of fifo entries; has to be a power of two; min 1
       FIFO_WIDTH => 32,            -- size of data elements in fifo
@@ -359,7 +359,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   receive_fifo_gen:
   for i in 0 to SLINK_NUM_RX-1 generate
-    receive_fifo_inst: neorv32_fifo
+    receive_fifo_inst: entity neorv32.neorv32_fifo
     generic map (
       FIFO_DEPTH => SLINK_RX_FIFO, -- number of fifo entries; has to be a power of two; min 1
       FIFO_WIDTH => 32,            -- size of data elements in fifo

@@ -227,7 +227,7 @@ begin
 
   -- Co-Processor 0: Shifter (CPU Core ISA) --------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-    neorv32_cpu_cp_shifter_inst: neorv32_cpu_cp_shifter
+    neorv32_cpu_cp_shifter_inst: entity neorv32.neorv32_cpu_cp_shifter
     generic map (
       FAST_SHIFT_EN => FAST_SHIFT_EN -- use barrel shifter for shift operations
     )
@@ -251,7 +251,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_cp_muldiv_inst_true:
   if (CPU_EXTENSION_RISCV_M = true) or (CPU_EXTENSION_RISCV_Zmmul = true) generate
-    neorv32_cpu_cp_muldiv_inst: neorv32_cpu_cp_muldiv
+    neorv32_cpu_cp_muldiv_inst: entity neorv32.neorv32_cpu_cp_muldiv
     generic map (
       FAST_MUL_EN => FAST_MUL_EN,          -- use DSPs for faster multiplication
       DIVISION_EN => CPU_EXTENSION_RISCV_M -- implement divider hardware
@@ -288,7 +288,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_cp_fpu_inst_true:
   if (CPU_EXTENSION_RISCV_Zfinx = true) generate
-    neorv32_cpu_cp_fpu_inst: neorv32_cpu_cp_fpu
+    neorv32_cpu_cp_fpu_inst: entity neorv32.neorv32_cpu_cp_fpu
     port map (
       -- global control --
       clk_i    => clk_i,        -- global clock, rising edge

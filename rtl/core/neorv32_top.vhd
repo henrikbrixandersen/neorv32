@@ -449,7 +449,7 @@ begin
 
   -- CPU Core -------------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_inst: neorv32_cpu
+  neorv32_cpu_inst: entity neorv32.neorv32_cpu
   generic map (
     -- General --
     HW_THREAD_ID                 => HW_THREAD_ID,        -- hardware thread id
@@ -563,7 +563,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_icache_inst_true:
   if (ICACHE_EN = true) generate
-    neorv32_icache_inst: neorv32_icache
+    neorv32_icache_inst: entity neorv32.neorv32_icache
     generic map (
       ICACHE_NUM_BLOCKS => ICACHE_NUM_BLOCKS,   -- number of blocks (min 2), has to be a power of 2
       ICACHE_BLOCK_SIZE => ICACHE_BLOCK_SIZE,   -- block size in bytes (min 4), has to be a power of 2
@@ -613,7 +613,7 @@ begin
 
   -- CPU Bus Switch -------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_busswitch_inst: neorv32_busswitch
+  neorv32_busswitch_inst: entity neorv32.neorv32_busswitch
   generic map (
     PORT_CA_READ_ONLY => false, -- set if controller port A is read-only
     PORT_CB_READ_ONLY => true   -- set if controller port B is read-only
@@ -683,7 +683,7 @@ begin
 
   -- Processor-Internal Bus Keeper (BUS_KEEPER) ---------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_bus_keeper_inst: neorv32_bus_keeper
+  neorv32_bus_keeper_inst: entity neorv32.neorv32_bus_keeper
   generic map (
     -- External memory interface --
     MEM_EXT_EN        => MEM_EXT_EN,        -- implement external memory bus interface?
@@ -711,7 +711,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_int_imem_inst_true:
   if (MEM_INT_IMEM_EN = true) generate
-    neorv32_int_imem_inst: neorv32_imem
+    neorv32_int_imem_inst: entity neorv32.neorv32_imem
     generic map (
       IMEM_BASE    => imem_base_c,          -- memory base address
       IMEM_SIZE    => MEM_INT_IMEM_SIZE,    -- processor-internal instruction memory size in bytes
@@ -740,7 +740,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_int_dmem_inst_true:
   if (MEM_INT_DMEM_EN = true) generate
-    neorv32_int_dmem_inst: neorv32_dmem
+    neorv32_int_dmem_inst: entity neorv32.neorv32_dmem
     generic map (
       DMEM_BASE => dmem_base_c,      -- memory base address
       DMEM_SIZE => MEM_INT_DMEM_SIZE -- processor-internal data memory size in bytes
@@ -768,7 +768,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_boot_rom_inst_true:
   if (INT_BOOTLOADER_EN = true) generate
-    neorv32_boot_rom_inst: neorv32_boot_rom
+    neorv32_boot_rom_inst: entity neorv32.neorv32_boot_rom
     generic map (
       BOOTROM_BASE => boot_rom_base_c -- boot ROM base address
     )
@@ -792,7 +792,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_wishbone_inst_true:
   if (MEM_EXT_EN = true) generate
-    neorv32_wishbone_inst: neorv32_wishbone
+    neorv32_wishbone_inst: entity neorv32.neorv32_wishbone
     generic map (
       -- Internal instruction memory --
       MEM_INT_IMEM_EN   => MEM_INT_IMEM_EN,    -- implement processor-internal instruction memory
@@ -864,7 +864,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cfs_inst_true:
   if (IO_CFS_EN = true) generate
-    neorv32_cfs_inst: neorv32_cfs
+    neorv32_cfs_inst: entity neorv32.neorv32_cfs
     generic map (
       CFS_CONFIG   => IO_CFS_CONFIG,  -- custom CFS configuration generic
       CFS_IN_SIZE  => IO_CFS_IN_SIZE, -- size of CFS input conduit in bits
@@ -907,7 +907,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_gpio_inst_true:
   if (IO_GPIO_EN = true) generate
-    neorv32_gpio_inst: neorv32_gpio
+    neorv32_gpio_inst: entity neorv32.neorv32_gpio
     port map (
       -- host access --
       clk_i  => clk_i,                     -- global clock line
@@ -935,7 +935,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_wdt_inst_true:
   if (IO_WDT_EN = true) generate
-    neorv32_wdt_inst: neorv32_wdt
+    neorv32_wdt_inst: entity neorv32.neorv32_wdt
     port map (
       -- host access --
       clk_i       => clk_i,                    -- global clock line
@@ -969,7 +969,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_mtime_inst_true:
   if (IO_MTIME_EN = true) generate
-    neorv32_mtime_inst: neorv32_mtime
+    neorv32_mtime_inst: entity neorv32.neorv32_mtime
     port map (
       -- host access --
       clk_i  => clk_i,                      -- global clock line
@@ -1019,7 +1019,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_uart0_inst_true:
   if (IO_UART0_EN = true) generate
-    neorv32_uart0_inst: neorv32_uart
+    neorv32_uart0_inst: entity neorv32.neorv32_uart
     generic map (
       UART_PRIMARY => true -- true = primary UART (UART0), false = secondary UART (UART1)
     )
@@ -1063,7 +1063,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_uart1_inst_true:
   if (IO_UART1_EN = true) generate
-    neorv32_uart1_inst: neorv32_uart
+    neorv32_uart1_inst: entity neorv32.neorv32_uart
     generic map (
       UART_PRIMARY => false -- true = primary UART (UART0), false = secondary UART (UART1)
     )
@@ -1107,7 +1107,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_spi_inst_true:
   if (IO_SPI_EN = true) generate
-    neorv32_spi_inst: neorv32_spi
+    neorv32_spi_inst: entity neorv32.neorv32_spi
     port map (
       -- host access --
       clk_i       => clk_i,                    -- global clock line
@@ -1146,7 +1146,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_twi_inst_true:
   if (IO_TWI_EN = true) generate
-    neorv32_twi_inst: neorv32_twi
+    neorv32_twi_inst: entity neorv32.neorv32_twi
     port map (
       -- host access --
       clk_i       => clk_i,                    -- global clock line
@@ -1182,7 +1182,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_pwm_inst_true:
   if (IO_PWM_NUM_CH > 0) generate
-    neorv32_pwm_inst: neorv32_pwm
+    neorv32_pwm_inst: entity neorv32.neorv32_pwm
     generic map (
       NUM_CHANNELS => IO_PWM_NUM_CH -- number of PWM channels (0..60)
     )
@@ -1216,7 +1216,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_trng_inst_true:
   if (IO_TRNG_EN = true) generate
-    neorv32_trng_inst: neorv32_trng
+    neorv32_trng_inst: entity neorv32.neorv32_trng
     port map (
       -- host access --
       clk_i  => clk_i,                     -- global clock line
@@ -1240,7 +1240,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_neoled_inst_true:
   if (IO_NEOLED_EN = true) generate
-    neorv32_neoled_inst: neorv32_neoled
+    neorv32_neoled_inst: entity neorv32.neorv32_neoled
     generic map (
       FIFO_DEPTH => IO_NEOLED_TX_FIFO -- TX FIFO depth (1..32k, power of two)
     )
@@ -1277,7 +1277,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_slink_inst_true:
   if (io_slink_en_c = true) generate
-    neorv32_slink_inst: neorv32_slink
+    neorv32_slink_inst: entity neorv32.neorv32_slink
     generic map (
       SLINK_NUM_TX  => SLINK_NUM_TX,  -- number of TX links (0..8)
       SLINK_NUM_RX  => SLINK_NUM_RX,  -- number of TX links (0..8)
@@ -1323,7 +1323,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_xirq_inst_true:
   if (XIRQ_NUM_CH > 0) generate
-    neorv32_slink_inst: neorv32_xirq
+    neorv32_slink_inst: entity neorv32.neorv32_xirq
     generic map (
       XIRQ_NUM_CH           => XIRQ_NUM_CH,          -- number of external IRQ channels (0..32)
       XIRQ_TRIGGER_TYPE     => XIRQ_TRIGGER_TYPE,    -- trigger type: 0=level, 1=edge
@@ -1355,7 +1355,7 @@ begin
 
   -- System Configuration Information Memory (SYSINFO) --------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_sysinfo_inst: neorv32_sysinfo
+  neorv32_sysinfo_inst: entity neorv32.neorv32_sysinfo
   generic map (
     -- General --
     CLOCK_FREQUENCY      => CLOCK_FREQUENCY,      -- clock frequency of clk_i in Hz
@@ -1413,7 +1413,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_neorv32_debug_dm_true:
   if (ON_CHIP_DEBUGGER_EN = true) generate
-    neorv32_debug_dm_inst: neorv32_debug_dm
+    neorv32_debug_dm_inst: entity neorv32.neorv32_debug_dm
     port map (
       -- global control --
       clk_i            => clk_i,                    -- global clock line
@@ -1460,7 +1460,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_neorv32_debug_dtm_true:
   if (ON_CHIP_DEBUGGER_EN = true) generate
-    neorv32_debug_dtm_inst: neorv32_debug_dtm
+    neorv32_debug_dtm_inst: entity neorv32.neorv32_debug_dtm
     generic map (
       IDCODE_VERSION => jtag_tap_idcode_version_c, -- version
       IDCODE_PARTID  => jtag_tap_idcode_partid_c,  -- part number

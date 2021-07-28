@@ -251,7 +251,7 @@ begin
 
   -- TX Buffer (FIFO) -----------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  tx_data_fifo: neorv32_fifo
+  tx_data_fifo: entity neorv32.neorv32_fifo
   generic map (
     FIFO_DEPTH => FIFO_DEPTH, -- number of fifo entries; has to be a power of two; min 1
     FIFO_WIDTH => 32+2,       -- size of data elements in fifo

@@ -223,7 +223,7 @@ begin
 
   -- Control Unit ---------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_control_inst: neorv32_cpu_control
+  neorv32_cpu_control_inst: entity neorv32.neorv32_cpu_control
   generic map (
     -- General --
     HW_THREAD_ID                 => HW_THREAD_ID,                 -- hardware thread id
@@ -303,7 +303,7 @@ begin
 
   -- Register File --------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_regfile_inst: neorv32_cpu_regfile
+  neorv32_cpu_regfile_inst: entity neorv32.neorv32_cpu_regfile
   generic map (
     CPU_EXTENSION_RISCV_E => CPU_EXTENSION_RISCV_E -- implement embedded RF extension?
   )
@@ -323,7 +323,7 @@ begin
 
   -- ALU ------------------------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_alu_inst: neorv32_cpu_alu
+  neorv32_cpu_alu_inst: entity neorv32.neorv32_cpu_alu
   generic map (
     -- RISC-V CPU Extensions --
     CPU_EXTENSION_RISCV_M     => CPU_EXTENSION_RISCV_M,     -- implement mul/div extension?
@@ -356,7 +356,7 @@ begin
 
   -- Bus Interface Unit ---------------------------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  neorv32_cpu_bus_inst: neorv32_cpu_bus
+  neorv32_cpu_bus_inst: entity neorv32.neorv32_cpu_bus
   generic map (
     CPU_EXTENSION_RISCV_A => CPU_EXTENSION_RISCV_A, -- implement atomic extension?
     CPU_EXTENSION_RISCV_C => CPU_EXTENSION_RISCV_C, -- implement compressed extension?

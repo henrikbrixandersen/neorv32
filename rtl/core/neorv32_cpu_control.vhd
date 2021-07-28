@@ -458,7 +458,7 @@ begin
 
   -- Instruction Prefetch Buffer (FIFO) -----------------------------------------------------
   -- -------------------------------------------------------------------------------------------
-  instr_prefetch_buffer: neorv32_fifo
+  instr_prefetch_buffer: entity neorv32.neorv32_fifo
   generic map (
     FIFO_DEPTH => CPU_IPB_ENTRIES,  -- number of fifo entries; has to be a power of two; min 1
     FIFO_WIDTH => ipb.wdata'length, -- size of data elements in fifo
@@ -593,7 +593,7 @@ begin
   -- -------------------------------------------------------------------------------------------
   neorv32_cpu_decompressor_inst_true:
   if (CPU_EXTENSION_RISCV_C = true) generate
-    neorv32_cpu_decompressor_inst: neorv32_cpu_decompressor
+    neorv32_cpu_decompressor_inst: entity neorv32.neorv32_cpu_decompressor
     port map (
       -- instruction input --
       ci_instr16_i => ci_instr16, -- compressed instruction input
